@@ -1,7 +1,7 @@
 #include <RadioLib.h>
 #include "boards.h"
 
-#define NODE_ID "003"  //node ID for this device
+#define NODE_ID "001"  //node ID for this device
 
 
 SX1262 radio = new Module(RADIO_CS_PIN, RADIO_DIO1_PIN, RADIO_RST_PIN, RADIO_BUSY_PIN);
@@ -88,7 +88,7 @@ void handlePacket(Packet pkt) {
   // show received message
   lastRX = pkt.recipient + "|" + pkt.route + "|" + pkt.payload;
   currentStatus = "RX";
-  updateDisplay(currentStatus, lastRX, lastTX);
+  // updateDisplay(currentStatus, lastRX, lastTX);
 
   // check if the message ends here
   if (pkt.route.length() == 0) {
@@ -96,7 +96,7 @@ void handlePacket(Packet pkt) {
 
     currentStatus = "FINAL";
     lastRX = pkt.payload;
-    updateDisplay(currentStatus, lastRX, lastTX);
+    // updateDisplay(currentStatus, lastRX, lastTX);
     return;
   }
 
@@ -121,7 +121,7 @@ void handlePacket(Packet pkt) {
 
   lastTX = newPacket;
   currentStatus = "FWD";
-  updateDisplay(currentStatus, lastRX, lastTX);
+  // updateDisplay(currentStatus, lastRX, lastTX);
 }
 
 // handle serial input for testing. Format: route|payload
@@ -193,7 +193,7 @@ void setup() {
   radio.startReceive();
 
   currentStatus = "LISTEN";
-  updateDisplay(currentStatus, lastRX, lastTX);
+  // updateDisplay(currentStatus, lastRX, lastTX);
 
   Serial.println("Listening...");
 
@@ -231,7 +231,7 @@ void loop() {
 
     lastTX = outgoingPacket;
     currentStatus = "TX";
-    updateDisplay(currentStatus, lastRX, lastTX);
+    // updateDisplay(currentStatus, lastRX, lastTX);
 
     radio.setDio1Action(setTxFlag);
     radio.startTransmit(outgoingPacket);
@@ -242,10 +242,9 @@ void loop() {
     Serial.println("TX done");
 
     currentStatus = "LISTEN";
-    updateDisplay(currentStatus, lastRX, lastTX);
 
     radio.setDio1Action(setRxFlag);
     radio.startReceive();
+    // updateDisplay(currentStatus, lastRX, lastTX);
   }
 }
-//changes

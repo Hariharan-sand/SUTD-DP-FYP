@@ -13,7 +13,7 @@
 
 #define LoRa_frequency      915.0
 #define Bandwidth           500
-#define OutputPower         -2
+#define OutputPower         -9
 #define Currentlimit        140
 #define SpreadingFactor     5
 #define CodeRate            5
