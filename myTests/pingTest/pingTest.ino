@@ -133,6 +133,10 @@ void loop() {
     int state = radio.readData(str);
 
     if (state == RADIOLIB_ERR_NONE) {
+      // Get signal quality metrics for the received packet
+      float rssi = radio.getRSSI();
+      float snr = radio.getSNR();
+
       Packet pkt = parsePacket(str);
       
       if (pkt.recipient == NODE_ID) {
@@ -143,7 +147,11 @@ void loop() {
           packetsReceived++;
           lastRttStr = String(rtt) + "ms";
           
-          Serial.print("RTT Success: "); Serial.println(lastRttStr);
+          Serial.print("RTT Success: "); 
+          Serial.print(lastRttStr);
+          Serial.print(" | RSSI: "); Serial.print(rssi);
+          Serial.print(" dBm | SNR: "); Serial.print(snr);
+          Serial.println(" dB");
         //   updateDisplay("RTT SUCCESS", pkt.payload, lastRttStr);
         } 
         // Reflector Node Logic: Send it back immediately
@@ -151,7 +159,10 @@ void loop() {
           outgoingPacket = pkt.route + "||" + pkt.payload;
           readyToSend = true;
           
-          Serial.println("Reflecting packet...");
+          Serial.print("Reflecting packet... | RSSI: "); 
+          Serial.print(rssi);
+          Serial.print(" dBm | SNR: "); Serial.print(snr);
+          Serial.println(" dB");
         //   updateDisplay("REFLECTING", pkt.payload, outgoingPacket);
         }
       }
