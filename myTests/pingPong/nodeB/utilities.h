@@ -7,11 +7,11 @@
 #define LILYGO_S3_E_PAPER_V_1_0
 
 #define LoRa_frequency      915.0
-#define Bandwidth           500
+#define Bandwidth           125
 #define OutputPower         -9
 #define Currentlimit        140
-#define SpreadingFactor     5
-#define CodeRate            5
+#define SpreadingFactor     7
+#define CodeRate            7
 
 #if defined(LILYGO_S3_E_PAPER_V_1_0)
 

@@ -28,7 +28,7 @@
 SX1262 radio = new Module(RADIO_CS_PIN, RADIO_DIO1_PIN, RADIO_RST_PIN, RADIO_BUSY_PIN);
 
 // ---------- Ping interval ----------
-static const unsigned long PING_INTERVAL_MS = 10000UL; // 10 seconds
+static const unsigned long PING_INTERVAL_MS = 2000UL; // 2 seconds
 
 // ---------- Wire-format structs ----------
 #pragma pack(push, 1)
